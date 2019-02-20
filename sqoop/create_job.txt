@@ -1,0 +1,31 @@
+
+-- Create sqoop job for importing sales data to HDFS 
+
+-- start of the command
+
+sqoop-job --create import_sales_data_to_hdfs \
+    -- import \
+    --connect "jdbc:mysql://quickstart.cloudera/black_friday" \
+    --table black_friday \
+    --as-avrodatafile \
+    --target-dir=/user/cloudera/black_friday \
+    --compress \
+    --compression-codec org.apache.hadoop.io.compress.SnappyCodec 
+
+-- end of the command
+
+
+-- Create sqoop job for importing sales data to HIVE TABLE 
+-- start of the command
+
+sqoop-job --create import_sales_data_to_hive \
+    -- import \
+    --connect "jdbc:mysql://quickstart.cloudera/black_friday" \
+    --table black_friday \
+    --hive-home /user/hive/warehouse/black_friday.db \
+    --hive-import \
+    --hive-overwrite \
+    --create-hive-table \
+    --hive-table black_friday.black_friday 
+
+-- end of the command

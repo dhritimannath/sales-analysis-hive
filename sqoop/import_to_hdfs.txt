@@ -1,0 +1,25 @@
+
+sqoop import \
+  --connect "jdbc:mysql://quickstart.cloudera/black_friday" \
+  --username=dhritiman \
+  --password=panthrs \
+  --table black_friday \
+  --direct
+  --as-avrodatafile \
+  --target-dir=/user/cloudera/black_friday
+  --compress \
+  --compression-codec org.apache.hadoop.io.compress.SnappyCodec \
+
+
+-- Import directly into Hive table
+sqoop import \
+  --connect "jdbc:mysql://quickstart.cloudera/black_friday" \
+  --username=dhritiman \
+  --password=panthrs \
+  --table black_friday \
+  --hive-home /user/hive/warehouse/black_friday.db \
+  --hive-import \
+  --hive-overwrite \
+  --create-hive-table \
+  --hive-table departments \
+

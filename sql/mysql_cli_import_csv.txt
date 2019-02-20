@@ -1,0 +1,8 @@
+-- Import data to mysql table
+--  Replace `file_path_location` with the desired file path location
+
+mysqlimport --ignore-lines=1 \
+            --fields-terminated-by=, \
+            --local -u user_name \
+            -p black_friday \
+            file_path_location.csv
